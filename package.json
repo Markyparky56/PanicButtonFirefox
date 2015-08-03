@@ -1,0 +1,13 @@
+{
+  "title": "NoFap Panic Button",
+  "name": "panicbutton",
+  "version": "0.0.1",
+  "description": "This extension provides an inbrowser version of the NoFap Emergency Relpase Prevention Tool.",
+  "main": "index.js",
+  "author": "Mark A. Ropper",
+  "engines": {
+    "firefox": ">=38.0a1",
+    "fennec": ">=38.0a1"
+  },
+  "license": "MIT"
+}
