@@ -1,5 +1,4 @@
-// Because Panels can't access Addon-SDKs we have to port it out to be handled by out main code file
-
+// Because Panels can't access Addon-SDKs we have to port it out to be handled by the main code file
 function passUrlOut(url)
 {    
     self.port.emit("newTabUrl", url); 
@@ -14,7 +13,8 @@ self.port.on("returnReligious", function(religious)
 {
     return religious;
 });
-    
+
+// Button handlers    
 $(emergency).click(
     function()
     {

@@ -24,18 +24,6 @@ var panel = panels.Panel({
     onHide: handleHide
 });
 
-// Handle changing tab url
-panel.port.on("newTabUrl", function(newUrl)
-{
-    tabs.activeTab.url = newUrl;
-});
-
-// Handle requests for religious setting
-panel.port.on("getReligious", function()
-{
-    panel.port.emit("returnReligious", prefs.prefs["religious"]);
-});
-
 function handleChange(state)
 {
     if(state.checked)
@@ -50,3 +38,16 @@ function handleHide()
 {
     button.state("window", {checked: false});
 }
+
+// Handle changing tab url
+panel.port.on("newTabUrl", function(newUrl)
+{
+    tabs.activeTab.url = newUrl;
+});
+
+// Handle requests for religious setting
+panel.port.on("getReligious", function()
+{
+    panel.port.emit("returnReligious", prefs.prefs["religious"]);
+});
+
