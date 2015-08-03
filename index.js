@@ -3,12 +3,7 @@ var panels = require("sdk/panel");
 var tabs = require("sdk/tabs");
 var self = require("sdk/self");
 var data = require("sdk/self").data;
-var ss = require("sdk/simple-storage");
-
-if(!ss.storage.religious)
-{
-    ss.storage.religious = false;
-}
+var prefs = require("sdk/simple-prefs");
 
 var button = ToggleButton({
     id: "button",
@@ -22,23 +17,23 @@ var button = ToggleButton({
 });
 
 var panel = panels.Panel({
+    width: 210,
+    height: 274,
     contentURL: self.data.url("popup.html"),
-    contentScriptFile: [data.url("jquery.min.js"), data.url("popup.js")],
+    contentScriptFile: ["./jquery.min.js", "./popup.js"],
     onHide: handleHide
 });
 
 // Handle changing tab url
 panel.port.on("newTabUrl", function(newUrl)
 {
-    console.log("Changing tab...");
-    //tabs.on("activate", function(tab){tab.url=newUrl});
     tabs.activeTab.url = newUrl;
 });
 
 // Handle requests for religious setting
 panel.port.on("getReligious", function()
 {
-    panel.port.emit("returnReligious", ss.storage.religious);
+    panel.port.emit("returnReligious", prefs.prefs["religious"]);
 });
 
 function handleChange(state)
