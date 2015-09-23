@@ -1,4 +1,6 @@
 // Because Panels can't access Addon-SDKs we have to port it out to be handled by the main code file
+var religiousEnabled;
+
 function passUrlOut(url)
 {    
     self.port.emit("newTabUrl", url); 
@@ -6,39 +8,43 @@ function passUrlOut(url)
 
 function getReligiousSetting()
 {
-    self.port.emit("getReligious");    
+    self.port.emit("getReligious");  
 }
 
-self.port.on("returnReligious", function(religious)
+self.port.on("returnReligious", function(religiousSetting)
 {
-    return religious;
+    religiousEnabled = religiousSetting;
 });
 
 // Button handlers    
 $(emergency).click(
     function()
     {
-        $.get("http://emergency.nofap.com/director.php", {cat:"em", religious:getReligiousSetting() ? "true" : "false", platform:"extension"}, function(e){passUrlOut(e);});
+        getReligiousSetting(); // Check if setting has changed
+        $.get("http://emergency.nofap.com/director.php", {cat:"em", religious:religiousEnabled ? "true" : "false", platform:"extension"}, function(e){passUrlOut(e);});
     }
 );
 
 $(depression).click(
     function()
     {
-        $.get("http://emergency.nofap.com/director.php", {cat:"dep", religious:getReligiousSetting() ? "true" : "false", platform:"extension"}, function(e){passUrlOut(e);});
+        getReligiousSetting(); // Check if setting has changed
+        $.get("http://emergency.nofap.com/director.php", {cat:"dep", religious:religiousEnabled? "true" : "false", platform:"extension"}, function(e){passUrlOut(e);});
     }
 );
 
 $(rejection).click(
     function()
     {
-        $.get("http://emergency.nofap.com/director.php", {cat:"rej", religious:getReligiousSetting() ? "true" : "false", platform:"extension"}, function(e){passUrlOut(e);});
+        getReligiousSetting(); // Check if setting has changed
+        $.get("http://emergency.nofap.com/director.php", {cat:"rej", religious:religiousEnabled ? "true" : "false", platform:"extension"}, function(e){passUrlOut(e);});
     }
 );
 
 $(relapsed).click(
     function()
     {
-        $.get("http://emergency.nofap.com/director.php", {cat:"rel", religious:getReligiousSetting() ? "true" : "false", platform:"extension"}, function(e){passUrlOut(e);});     
+        getReligiousSetting(); // Check if setting has changed
+        $.get("http://emergency.nofap.com/director.php", {cat:"rel", religious:religiousEnabled ? "true" : "false", platform:"extension"}, function(e){passUrlOut(e);});     
     }
 );

@@ -1,3 +1,9 @@
+// Define namespace
+if(typeof panicbutton == "undefined")
+{
+    var panicbutton = {};
+}
+
 var { ToggleButton } = require("sdk/ui/button/toggle");
 var panels = require("sdk/panel");
 var tabs = require("sdk/tabs");
@@ -5,7 +11,7 @@ var self = require("sdk/self");
 var data = require("sdk/self").data;
 var prefs = require("sdk/simple-prefs");
 
-var button = ToggleButton({
+panicbutton.button = ToggleButton({
     id: "button",
     label: "Panic Button",
     icon: {
@@ -19,7 +25,7 @@ var button = ToggleButton({
     onChange: handleChange
 });
 
-var panel = panels.Panel({
+panicbutton.panel = panels.Panel({
     width: 210,
     height: 275,
     contentURL: self.data.url("popup.html"),
@@ -31,26 +37,26 @@ function handleChange(state)
 {
     if(state.checked)
     {
-        panel.show({
-            position: button
+        panicbutton.panel.show({
+            position: panicbutton.button
         });
     }
 }
 
 function handleHide()
 {
-    button.state("window", {checked: false});
+    panicbutton.button.state("window", {checked: false});
 }
 
 // Handle changing tab url
-panel.port.on("newTabUrl", function(newUrl)
+panicbutton.panel.port.on("newTabUrl", function(newUrl)
 {
     tabs.activeTab.url = newUrl;
 });
 
 // Handle requests for religious setting
-panel.port.on("getReligious", function()
+panicbutton.panel.port.on("getReligious", function()
 {
-    panel.port.emit("returnReligious", prefs.prefs["religious"]);
+    panicbutton.panel.port.emit("returnReligious", prefs.prefs["religious"]);
 });
 
