@@ -29,7 +29,7 @@ panicbutton.panel = panels.Panel({
     width: 210,
     height: 275,
     contentURL: self.data.url("popup.html"),
-    contentScriptFile: ["./jquery.min.js", "./popup.js"],
+    contentScriptFile: ["./jquery-2.1.4.min.js", "./popup.js"],
     onHide: handleHide
 });
 
