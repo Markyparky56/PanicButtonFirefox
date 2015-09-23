@@ -19,8 +19,7 @@ panicbutton.button = ToggleButton({
         "19": "./icon19.png",
         "32": "./icon32.png",
         "48": "./icon48.png",
-        "64": "./icon64.png",
-        "128": "./icon128.png"
+        "64": "./icon64.png"
     },
     onChange: handleChange
 });
