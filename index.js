@@ -57,6 +57,6 @@ panicbutton.panel.port.on("newTabUrl", function(newUrl)
 // Handle requests for religious setting
 panicbutton.panel.port.on("getReligious", function()
 {
-    panicbutton.panel.port.emit("returnReligious", prefs.prefs["religious"]);
+    panicbutton.panel.port.emit("returnReligious", prefs.prefs["extensions.panicbutton.religious"]);
 });
 

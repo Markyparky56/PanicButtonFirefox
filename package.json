@@ -1,7 +1,7 @@
 {
   "title": "NoFap Panic Button",
   "name": "panicbutton",
-  "version": "0.0.11",
+  "version": "0.0.12",
   "description": "This extension provides an inbrowser version of the NoFap Emergency Relpase Prevention Tool.",
   "main": "index.js",
   "author": "Mark A. Ropper",
@@ -11,7 +11,7 @@
   },
   "license": "MIT",
   "preferences": [{
-    "name": "religious",
+    "name": "extensions.panicbutton.religious",
     "title": "Religious",
     "type": "bool",
     "value": false,
