@@ -2,7 +2,7 @@
   "title": "NoFap Panic Button",
   "name": "panicbutton",
   "version": "1.0.0",
-  "description": "This extension provides an inbrowser version of the NoFap Emergency Relpase Prevention Tool.",
+  "description": "This extension provides an in browser version of the NoFap Emergency Relapse Prevention Tool.",
   "main": "index.js",
   "author": "Mark A. Ropper",
   "engines": {
