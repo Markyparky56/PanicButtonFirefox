@@ -1,14 +1,18 @@
 {
   "title": "NoFap Panic Button",
   "name": "panicbutton",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "This extension provides an in browser version of the NoFap Emergency Relapse Prevention Tool.",
   "main": "index.js",
   "author": "Mark A. Ropper",
   "engines": {
     "firefox": ">=38.0a1"
   },
-  "permissions": {"private-browsing": true},
+  "permissions":
+  {
+    "private-browsing": true,
+    "multiprocess":true    
+  },
   "license": "MIT",
   "preferences": [{
     "name": "extensions.panicbutton.religious",
