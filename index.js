@@ -10,6 +10,21 @@ var tabs = require("sdk/tabs");
 var self = require("sdk/self");
 var data = require("sdk/self").data;
 var prefs = require("sdk/simple-prefs");
+var pageMod = require("sdk/page-mod"); // Content-script for NSFWGuard
+
+pageMod.PageMod({
+        include: /^https?:\/\/[^\.]*\.reddit.com\/r\/[^*]+/, // Isn't regex beautiful?
+        contentScriptFile: ["./jquery-2.1.4.min.js", "./nsfwguard.js"],
+        contentScriptWhen: "start",
+        onAttach: function onAttach(worker)
+        {
+            worker.port.on("isEnabled", function()
+            {
+                worker.port.emit("returnEnabled", {nsfwGuardEnabled: prefs.prefs["extensions.panicbutton.nsfwGuardEnabled"],
+                                                   safehavenUrl:     prefs.prefs["extensions.panicbutton.safehavenUrl"]});
+            });
+        }
+});
 
 panicbutton.button = ToggleButton({
     id: "button",
@@ -58,4 +73,3 @@ panicbutton.panel.port.on("getReligious", function()
 {
     panicbutton.panel.port.emit("returnReligious", prefs.prefs["extensions.panicbutton.religious"]);
 });
-
