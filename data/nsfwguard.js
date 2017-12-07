@@ -32,9 +32,11 @@ panicbutton.processUrl = function()
     {
       panicbutton.url +=  "/";
     }
+    if(panicbutton.url == "https://www.reddit.com/r/all/") return false; // No about.json for r/all    
 
     // Append the about.json we want to check
     panicbutton.jsonUrl = panicbutton.url + "about.json";
+    return true;
   }
   else // Check for an over18 page
   {
@@ -44,34 +46,38 @@ panicbutton.processUrl = function()
     {
       // Caught an over18 access page, redirect to the safe haven
       window.location.replace(panicbutton.safehavenUrl);
+      return true;
     }
+    return false;
   }  
 }
 
 panicbutton.checkForNSFW = function()
 {
-  panicbutton.processUrl();
-  fetch(panicbutton.jsonUrl, {method: 'GET'})
-  .then((response) => { return response.json();})
-  .then((json) => {
-    if(typeof json != "undefined")
-    {
-      if(json.data.over18)
+  if(panicbutton.processUrl())
+  {
+    fetch(panicbutton.jsonUrl, {method: 'GET'})
+    .then((response) => { return response.json();})
+    .then((json) => {
+      if(typeof json != "undefined")
       {
-        window.location.replace(panicbutton.safehavenUrl);          
+        if(json.data.over18)
+        {
+          window.location.replace(panicbutton.safehavenUrl);          
+        }
       }
-    }
-    else if(typeof json[0].data.children[0] != "undefined") // Might be a comments page
-    {
-      if(json[0].data.children[0].data.over_18)
+      else if(typeof json[0].data.children[0] != "undefined") // Might be a comments page
       {
-        window.location.replace(panicbutton.safehavenUrl);          
+        if(json[0].data.children[0].data.over_18)
+        {
+          window.location.replace(panicbutton.safehavenUrl);          
+        }
       }
-    }
-    else
-    {
-      console.log("NSFW Guard Is Confused! Please contact app@nofap.com");        
-    }
-  })
-  .catch((err) => { console.error(err); })
+      else
+      {
+        console.log("NSFW Guard Is Confused! Please contact app@nofap.com");        
+      }
+    })
+    .catch((err) => { console.error(err); });
+  }
 }
