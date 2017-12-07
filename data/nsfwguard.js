@@ -6,26 +6,39 @@ if(typeof panicbutton == "undefined")
 {
     var panicbutton = {};
 }
-//console.log("NSFWGuard says hi!");
 // Check if NSFWGuard is enabled or not
-self.port.emit("isEnabled");
 
-self.port.on("returnEnabled", function(prefs)
-{
-    panicbutton.nsfwguardEnabled = prefs.nsfwGuardEnabled;
-    panicbutton.safehavenUrl = prefs.safehavenUrl;
-    //console.log(prefs);
-    if(panicbutton.nsfwguardEnabled)
-    {
-        panicbutton.checkForNSFW();
-    }
+browser.storage.sync.get({nsfwGuardEnabled: true, safehavenUrl: "https://www.reddit.com/r/nofap"})
+.then((result) => {
+  panicbutton.nsfwGuardEnabled = result.nsfwGuardEnabled;
+  panicbutton.safehavenUrl = result.safehavenUrl;
+  if(panicbutton.nsfwGuardEnabled)
+  {
+    panicbutton.checkForNSFW();
+  }
 });
 
 panicbutton.processUrl = function()
 {
     panicbutton.url = window.location.href;
-    var regex = /(^https?:\/\/[^\.]+\.reddit.com\/r\/[^\/]+\/?)/
-    panicbutton.url = regex.exec(panicbutton.url)[0];
+    // Check for NSFW Subreddit
+    var regex = /^https?:\/\/[^\.]*\.?reddit.com\/r\/[^\/]+\/?/
+    let regexResult = regex.exec(panicbutton.url);
+    if(regexResult != null) 
+    {
+      panicbutton.url = regexResult[0];
+    }
+    else // Check for an over18 page
+    {
+      let regex = /^https?:\/\/[^\.]*\.?reddit.com\/over18\?.*/
+      let regexResult = regex.exec(panicbutton.url);
+      if(regexResult != null)
+      {
+        // Caught an over18 access page, redirect to the safe haven
+        window.location.replace(panicbutton.safehavenUrl);
+      }
+    }
+    panicbutton.url = regexResult[0];
 
     // Check if we need to add a '/' to the end
     if(panicbutton.url.slice(-1) != "/")
@@ -58,7 +71,7 @@ panicbutton.checkForNSFW = function()
         }
         else
         {
-            console.log("Confused!");
+            console.log("NSFW Guard Is Confused! Please contact app@nofap.com");
         }
     });
 }
