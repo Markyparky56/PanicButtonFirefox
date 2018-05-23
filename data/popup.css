@@ -1,0 +1,88 @@
+body,html
+{
+    text-align:center;margin:0;-webkit-user-select:none;
+    user-select: none;
+    width: 225px;
+}
+.pbutton
+{
+    padding:10px;color:#fff;border:0;width:225px;
+}
+#emergency
+{
+    background:#e74c3c
+}
+#emergency:hover
+{
+    background:red;text-shadow:2px
+}
+#rejection
+{
+    background:#27ae60
+}
+#rejection:hover
+{
+    background:#2ecc71
+}
+#depression
+{
+    background:#2980b9
+}
+#depression:hover
+{
+    background:#3498db
+}
+#relapsed{
+    background:#8e44ad
+}
+#relapsed:hover
+{
+    background:#9b59b6
+}
+
+#religiousEnabledCheckbox {
+  -webkit-appearance: checkbox!important;
+  appearance: checkbox!important;
+  height: initial!important;
+  width: initial!important;
+  margin: 5px 3px 3px 4px!important;
+}
+input#religiousEnabledCheckbox:focus {
+  box-shadow: initial!important;
+}
+input#religiousEnabledCheckbox:before {
+  content: none!important;
+}
+.religiousSetting:hover {
+  background: #8B8986!important;
+}
+.religiousSetting {
+  position: absolute!important;
+  top: 1.5%!important;
+  left: 2%!important;
+  background: #73716e!important;
+  border-radius: 3px!important;
+  display: flex!important;
+  align-items: center!important;
+  justify-content: center!important;
+  padding-right: 4px!important;
+  width: 78.484px!important;
+}
+.religiousSetting:hover {
+  background: #8B8986!important;
+}
+.religiousSetting,
+.religiousSetting:hover {
+  z-index: 99999!important;
+}
+.religiousSettingText {
+  font-family: "Helvetica Neue",Helvetica,Arial,sans-serif!important;
+}
+.religiousSettingText {
+  font-size: 13px!important;
+  color: #fff!important;
+  text-align: center!important;
+  position: relative!important;
+  display: table-cell!important;
+  vertical-align: middle!important;
+}
