@@ -39,7 +39,7 @@
   "incognito": "spanning",
 
   "background": {
-    "scripts": ["data/nsfwguard_webrequestlistener.js"]
+    "scripts": ["data/nsfwguard_webrequestlistener.js", "data/subredditDBLoad.js"]
   },
 
   "web_accessible_resources": [
@@ -59,6 +59,11 @@
       "matches": ["*://*/*"],
       "js": ["data/popupbox.js"],
       "run_at": "document_end"
+    },
+    {
+      "matches": ["*://*.reddit.com/*"],
+      "js": ["data/nsfwguard_contentscript.js"],
+      "run_at": "document_start"
     }
   ],
 
