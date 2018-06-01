@@ -50,7 +50,7 @@
   "permissions": [
     "webRequest", "webRequestBlocking",
     "storage",
-    "*://*.reddit.com/*",
+    "*://*.reddit.com/r/*",
     "*://*/*"
   ],
 
@@ -61,7 +61,7 @@
       "run_at": "document_end"
     },
     {
-      "matches": ["*://*.reddit.com/*"],
+      "matches": ["*://*.reddit.com/r/*"],
       "js": ["data/nsfwguard_contentscript.js"],
       "run_at": "document_start"
     }
