@@ -79,7 +79,7 @@ panicbutton.nsfwguardListener = function(details)
 panicbutton.processUrl = function(url)
 {
   panicbutton.url = url;
-  // Check for an subreddit address
+  // Check for a subreddit address
   let regex = /^https?:\/\/[a-zA-Z0-9-]*\.?reddit.com\/r\/[a-zA-Z0-9-_]+\/?/
   let regexResult = regex.exec(panicbutton.url);
   if(regexResult != null)
